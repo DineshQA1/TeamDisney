@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Character from "./Character";
-import { Card, CardBody, Container } from "reactstrap";
+import { Container } from "reactstrap";
 
 //const [isLoaded, setIsLoaded] = useState(false);
 //const [error, setError] = useState(null);
@@ -34,7 +34,7 @@ const Disney = () => {
             <h1>Disney Characters</h1>
 
             <div>
-
+            
                 {data.map((character) => (
 
                     <Character key={character._id} character={character} />
