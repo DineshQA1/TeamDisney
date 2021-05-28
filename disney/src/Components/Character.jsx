@@ -1,43 +1,25 @@
-import { Card, CardBody, CardImg, CardText } from "reactstrap";
+
+import CharCard from "./CharCard";
 
 const Character = (props) => {
 
-    const {character} = props;
-    // console.log(character);
-    const strippedUrl = character.imageUrl;
-    let position;
-    let imgUrl;
-    console.log("Position", position);
-    // if(position===-1){
-    //     position = strippedUrl.indexOf(".jpg")
-    //     if(strippedUrl.includes(".jpeg")){
-    //         position = strippedUrl.indexOf(".jpeg") 
-    //     }
-    // }
-    if (character.imageUrl.includes(".png")){
-        position = strippedUrl.indexOf(".png");
-        imgUrl = character.imageUrl.substring(0, position+4);
-    }
-    else if (character.imageUrl.includes(".jpeg")){
-        position = strippedUrl.indexOf(".jpeg");
-        imgUrl = character.imageUrl.substring(0, position+5);
-    }
-    else if (character.imageUrl.includes(".jpg")){
-        position = strippedUrl.indexOf(".jpg");
-        imgUrl = character.imageUrl.substring(0, position+4);
-    }
+    const { data, query } = props;
+
+    //searchBar methods
+    const filterQuery = () => (data) => data.name.toLowerCase().includes(query.toLowerCase());
+    let filteredList = data.filter(filterQuery());
     
 
+    //Return body
     return (
         <>
-        <Card>
-          <CardBody>
-          <CardImg top width="20%" src={imgUrl} alt="Card image cap" />
-            <CardText><a href={character.sourceUrl}>{character.name}</a></CardText>
-            </CardBody>
-        </Card>
-        </>    
-        
+         {
+            filteredList.map((char)=>(
+            <CharCard key={char.id} character={char}/>
+            ))
+        } 
+        </>
+
     )
 
 }
