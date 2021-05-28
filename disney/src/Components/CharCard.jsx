@@ -1,5 +1,5 @@
-import { Card, CardBody, CardImg, CardText } from "reactstrap";
-const CharCard = ({character}) => {
+import { Card, CardBody, CardImg, CardText, UncontrolledCollapse, Button } from "reactstrap";
+const CharCard = ({ character }) => {
 
     //Image methods
     const strippedUrl = character.imageUrl;
@@ -19,10 +19,14 @@ const CharCard = ({character}) => {
         imgUrl = character.imageUrl.substring(0, position + 4);
     }
     return (
-        <Card>
+        <Card style={{ backgroundColor: "lightCyan", marginBottom: "1%", marginTop: "1%", marginRight: "1%", marginLeft: "1%" }}>
             <CardBody>
-                <img width="100" src={imgUrl} alt="Card image cap" />
-                <CardText><a href={character.sourceUrl}>{character.name}</a></CardText>
+                <img width="50%" src={imgUrl} alt="Card image cap" />
+                <CardText><a href={character.sourceUrl} target="_blank" style={{ textDecoration: "none", color: "black", fontSize: "20px", fontWeight: "bold" }}>{character.name}</a></CardText>
+                    <Button color="primary" id="toggler" style={{ marginBottom: '1rem' }}> Show More Information</Button>
+                    <UncontrolledCollapse toggler="#toggler">
+                        <CardText>TV Shows: {character.tvShows}</CardText>
+                    </UncontrolledCollapse>
             </CardBody>
         </Card>
     )
